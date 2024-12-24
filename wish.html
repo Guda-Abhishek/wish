@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Gift Box</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #00203FFF; /* Night sky-like background color */
+            overflow: hidden;
+            transition: background 1s;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff0000, #ff7f7f);
+            position: relative;
+            border-radius: 8px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .gift-box:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: #ffffff;
+            top: 65px;
+            left: 0;
+        }
+
+        .gift-box:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            background: #ffffff;
+            left: 65px;
+            top: 0;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .message {
+            display: none;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadein 1s forwards;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Santa and Tree background image styles */
+        .background-visible {
+            background: url('./santa.jpg') no-repeat left center, 
+                        url('./Christmas-Trees.jpg') no-repeat right center;
+            background-size: 50% 100%, 50% 100%;  /* Santa takes 70% width and Tree takes 50% width */
+            background-position: left center, right center; /* Ensure they touch at the center */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gift-box" onclick="openGift()"></div>
+    </div>
+    <div class="message" id="messageBox"></div>
+
+    <script>
+        function openGift() {
+            const giftBox = document.querySelector('.gift-box');
+            const messageBox = document.getElementById('messageBox');
+            const body = document.body;
+
+            // Hide the gift box
+            giftBox.style.display = 'none';
+
+            // Add the class to show the background images
+            body.classList.add('background-visible');
+
+            const userName = prompt("Enter your name:");
+
+            if (userName) {
+                messageBox.innerHTML = `<h1>Merry Christmas, ${userName}!</h1><p>Wishing you joy and happiness this holiday season!</p>`;
+                messageBox.style.display = 'block';
+            } else {
+                messageBox.innerHTML = '<h1>Merry Christmas!</h1><p>Wishing you a joyful holiday!</p>';
+                messageBox.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
